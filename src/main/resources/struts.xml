@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+    <constant name="struts.action.extension" value="do"/>
+
+	<package name="user" extends="struts-default" namespace="/">
+        <result-types>
+            <result-type name="freemarker" class="org.apache.struts2.views.freemarker.FreemarkerResult"/>
+        </result-types>
+		<action  name="index.*" class="com.ye.web.IndexAction" method="{1}">
+            <result type="freemarker" name="index">index/index.ftl</result>
+            <result type="stream" name="exportPdf">
+                <param name="contentType">application/vnd.ms-excel</param>
+                <param name="inputName">exportPdfStream</param>
+                <param name="contentDisposition">attachment;filename="${exportPdfFileName}"</param>
+            </result>
+        </action>
+	</package>
+</struts>
